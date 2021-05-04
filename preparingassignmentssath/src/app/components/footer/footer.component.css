@@ -1,0 +1,29 @@
+#footer {
+    text-align: center;
+    padding: 80px 0;
+    padding-bottom: 0px;
+    width: 100%;
+    background: #433f36;
+}
+.clear {
+    clear: both;
+}
+
+.hoc {
+    display: block;
+    margin: 0 auto;
+}
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.footerbtn{
+    background-color: cadetblue;
+    padding: 3% 1%;
+    color: coral;
+    font-family: "Robocon light";
+    font-size: xx-small;
+}

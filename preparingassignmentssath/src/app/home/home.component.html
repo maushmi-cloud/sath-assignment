@@ -1,0 +1,122 @@
+<div class="container">
+    <div [hidden]="submitted">
+      <h1>Basic Details</h1>
+      <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName"
+                 required
+                 [(ngModel)]="essentials.firstName" name="firstName"
+                 #firstName="ngModel"/>
+          <div [hidden]="firstName.valid || firstName.pristine"
+               class="alert alert-danger">
+            Name is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" id="lastName"
+                 [(ngModel)]="essentials.lastName" name="lastName">
+        </div>
+
+        <div class="form-group">
+          <label for="emailId">Email Id</label>
+          <input type="text" class="form-control" id="emailId"
+                 [(ngModel)]="essentials.emailId" name="emailId">
+        </div>
+
+        <div class="form-group">
+          <label for="contactNumber">Contact Number</label>
+          <input type="text" class="form-control" id="contactNumber"
+                  required
+                 [(ngModel)]="essentials.contactNumber" name="contactNumber"
+                 #contactNumber="ngModel"/>
+                 <div [hidden]="contactNumber.valid || contactNumber.pristine"
+                 class="alert alert-danger">
+              Contact Number is Required to connect for communication purpose.
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" class="form-control" id="dob" [(ngModel)]="essentials.dob">         
+        </div>
+
+
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select class="form-control" id="emailId"
+                  required
+                  [(ngModel)]="essentials.gender" name="gender"
+                  #gender="ngModel">
+            <option *ngFor="let gender of genderOption" [value]="gender">{{gender}}</option>
+          </select>
+          <div [hidden]="gender.valid" class="alert alert-danger">
+            essentials is required
+          </div>
+        </div>
+  
+        <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
+        <button type="button" class="btn btn-default" (click)="newEssentialsNeeder()" (click)="userForm.reset()">New Essentials</button>
+      </form>
+    </div>
+  
+    <div [hidden]="!submitted">
+      <h2>You submitted the given details, Please check once before proceeding:</h2>
+      <div class="row">
+        <div class="col-xs-3">First Name</div>
+        <div class="col-xs-9">{{ essentials.firstName }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Last Name</div>
+        <div class="col-xs-9">{{ essentials.lastName }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Gender</div>
+        <div class="col-xs-9">{{ essentials.gender }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Date of Birth</div>
+        <div class="col-xs-9">{{ essentials.dob }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Email Id</div>
+        <div class="col-xs-9">{{ essentials.emailId }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Contact Number</div>
+        <div class="col-xs-9">{{ essentials.contactNumber }}</div>
+      </div>
+      <br>
+      <div>
+      <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+      <button class="btn btn-success" (click)="funNext()">Next</button>
+      </div>
+    </div>
+
+    <div [hidden]="!flagnext && !submitted">
+      <h2>Please fill up the address details</h2>
+      
+      <div class="form-group">
+        <label for="stateCode">State Code</label>
+        <select class="form-control" id="stateCode"
+                required
+                [(ngModel)]="addressDetail.stateCode" name="stateCode"
+                (click)="selectStateCode()"
+                #stateCode="ngModel">
+          <option *ngFor="let stateCode of stateCodeValue" [value]="stateCodeValue" selected="Select">{{stateCode}}</option>
+        </select>
+        <div [hidden]="gender.valid" class="alert alert-danger">
+          essentials is required
+        </div>
+      </div>
+      <div class="form-group"
+      *ngIf="addressDetail.stateCode==''">
+        <label for="statePinCode">State PinCode</label>
+        <input type="text" class="form-control" id="statePinCode"
+               [(ngModel)]="addressDetail.statePinCode" name="statePinCode"
+               >
+      </div>
+    </div>
+  </div>
