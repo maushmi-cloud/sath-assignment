@@ -10,11 +10,21 @@ export class covidEssentials{
       
 
 }
+//Address Details after clicking Next button
 
 export class AddressDetails{
   constructor(public stateCode : string,
         public stateName : string,
         public statePinCode : number){
 
+  }
+
+  
+}
+//MobileNumberValidation
+export class MobileNumberValidation{
+  public mobileNo : string;
+  constructor(){
+    
   }
 }
