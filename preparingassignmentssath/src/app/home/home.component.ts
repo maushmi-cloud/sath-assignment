@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { covidEssentials } from './home';
-import {AddressDetails } from './home'
+import { covidEssentials, MobileNumberValidation } from './home';
+import {AddressDetails } from './home';
+
 
 @Component({
   selector: 'app-home',
@@ -13,11 +14,19 @@ export class HomeComponent implements OnInit {
 
   date = new Date();
   dateControlFormat = new Date('yyyy-dd-mm');
-  essentials = new covidEssentials('Maushmi',
-    'Parmar',
-    'aaa.@.acom',
-    '7535678882',
-    '20/12/1995',
+
+  //Mobile Number Validation
+  mobileNo = new MobileNumberValidation();
+  mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
+
+  //Email Id validation
+  emailIdPattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$";
+
+  essentials = new covidEssentials('',
+    '',
+    '',
+    '',
+    '',
     this.genderOption[0]);
 
     stateCodeValue = ['Select','BH','MH','WB'];
@@ -35,6 +44,7 @@ export class HomeComponent implements OnInit {
     }
     selectStateCode(){
       this.flagstateCode = true;
+      this.addressDetail = new AddressDetails(this.stateCodeValue[0],this.stateNameValue[0],842004);
     }
 
     newEssentialsNeeder() {

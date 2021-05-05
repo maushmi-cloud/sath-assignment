@@ -1,50 +1,59 @@
-<div class="container">
+<div class="container table">
+  
     <div [hidden]="submitted">
       <h1>Basic Details</h1>
+      <ul class="maintable">
       <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-        <div class="form-group">
-          <label for="firstName">First Name</label>
+        <div class="form-group col-md-3 ">
+          <label class="block"for="firstName">First Name</label>
           <input type="text" class="form-control" id="firstName"
                  required
-                 [(ngModel)]="essentials.firstName" name="firstName"
-                 #firstName="ngModel"/>
-          <div [hidden]="firstName.valid || firstName.pristine"
+                 [(ngModel)]="essentials.firstName" name="firstNameModel"
+                 #firstNameModel="ngModel"/>
+          <div [hidden]="firstNameModel.valid || firstNameModel.pristine"
                class="alert alert-danger">
             Name is required
           </div>
         </div>
   
-        <div class="form-group">
+        <div class="form-group col-md-3">
           <label for="lastName">Last Name</label>
           <input type="text" class="form-control" id="lastName"
                  [(ngModel)]="essentials.lastName" name="lastName">
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-3">
           <label for="emailId">Email Id</label>
           <input type="text" class="form-control" id="emailId"
-                 [(ngModel)]="essentials.emailId" name="emailId">
-        </div>
+                 [(ngModel)]="essentials.emailId"  name="emailId"
+                 #emailID="ngModel"
+               >
+          </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-3">
           <label for="contactNumber">Contact Number</label>
           <input type="text" class="form-control" id="contactNumber"
                   required
                  [(ngModel)]="essentials.contactNumber" name="contactNumber"
-                 #contactNumber="ngModel"/>
+                 #contactNumber="ngModel"
+                 [pattern]="mobNumberPattern"/>
                  <div [hidden]="contactNumber.valid || contactNumber.pristine"
                  class="alert alert-danger">
               Contact Number is Required to connect for communication purpose.
             </div>
+            <div *ngIf="contactNumber.errors?.pattern" class="alert alert-danger">  
+              Mobile number not valid.  
+            </div> 
+            
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-3">
           <label for="dob">Date of Birth</label>
-          <input type="date" class="form-control" id="dob" [(ngModel)]="essentials.dob">         
+          <input type="date" class="form-control" id="dob" [(ngModel)]="essentials.dob ">         
         </div>
 
 
-        <div class="form-group">
+        <div class="form-group col-md-3">
           <label for="gender">Gender</label>
           <select class="form-control" id="emailId"
                   required
@@ -53,70 +62,94 @@
             <option *ngFor="let gender of genderOption" [value]="gender">{{gender}}</option>
           </select>
           <div [hidden]="gender.valid" class="alert alert-danger">
-            essentials is required
+            gender is required
           </div>
         </div>
   
         <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
-        <button type="button" class="btn btn-default" (click)="newEssentialsNeeder()" (click)="userForm.reset()">New Essentials</button>
+        <button type="button" class="btn btn-default" (click)="newEssentialsNeeder()" (click)="userForm.reset()">New User</button>
       </form>
+      </ul>
     </div>
   
+    
     <div [hidden]="!submitted">
-      <h2>You submitted the given details, Please check once before proceeding:</h2>
+    
+      <h3 class="text-blue gap-bottom border-bottom">You submitted the given details,
+         Please check once before proceeding:</h3>
+      
+      <ul class="mainTable">
+      <li class="row clearfix">
+        <label class="col-xs-4 lead" strong>First Name:- </label>
+        <label class="col-xs-8 lead text-blue">{{ essentials.firstName }}</label>
+      </li>
+      
       <div class="row">
-        <div class="col-xs-3">First Name</div>
-        <div class="col-xs-9">{{ essentials.firstName }}</div>
+        <div class="col-xs-4 lead">Last Name:- </div>
+        <div class="col-xs-8 lead text-blue">{{ essentials.lastName }}</div>
       </div>
       <div class="row">
-        <div class="col-xs-3">Last Name</div>
-        <div class="col-xs-9">{{ essentials.lastName }}</div>
+        <div class="col-xs-4 lead">Gender:- </div>
+        <div class="col-xs-8 lead text-blue">{{ essentials.gender }}</div>
       </div>
-      <div class="row">
-        <div class="col-xs-3">Gender</div>
-        <div class="col-xs-9">{{ essentials.gender }}</div>
-      </div>
-      <div class="row">
+      <!--div class="row">
         <div class="col-xs-3">Date of Birth</div>
-        <div class="col-xs-9">{{ essentials.dob }}</div>
+        <div class="col-xs-6">{{ essentials.dob}}</div>
+      </div-->
+      <div class="row">
+        <div class="col-xs-4 lead">Email Id:- </div>
+        <div class="col-xs-8 lead text-blue">{{ essentials.emailId }}</div>
       </div>
       <div class="row">
-        <div class="col-xs-3">Email Id</div>
-        <div class="col-xs-9">{{ essentials.emailId }}</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-3">Contact Number</div>
-        <div class="col-xs-9">{{ essentials.contactNumber }}</div>
+        <div class="col-xs-4 lead">Contact Number:- </div>
+        <div class="col-xs-8 lead text-blue">{{ essentials.contactNumber }}</div>
       </div>
       <br>
       <div>
       <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-      <button class="btn btn-success" (click)="funNext()">Next</button>
+      <!--button class="btn btn-success" (click)="flagstateCode=funNext()" *ngIf=" flagnext=true">Next
+      </button-->
       </div>
+    </ul>
     </div>
+    
 
-    <div [hidden]="!flagnext && !submitted">
-      <h2>Please fill up the address details</h2>
-      
-      <div class="form-group">
+    <!--Next Page for Address Details-->
+    <div [hidden]="!submitted">
+      <h2 class="text-blue">Please fill up the address details</h2>
+      <ul class="mainTable">
+      <div class="form-group col-md-3">
         <label for="stateCode">State Code</label>
         <select class="form-control" id="stateCode"
                 required
                 [(ngModel)]="addressDetail.stateCode" name="stateCode"
-                (click)="selectStateCode()"
-                #stateCode="ngModel">
+                #stateCodeModel="ngModel">
           <option *ngFor="let stateCode of stateCodeValue" [value]="stateCodeValue" selected="Select">{{stateCode}}</option>
         </select>
-        <div [hidden]="gender.valid" class="alert alert-danger">
-          essentials is required
+        <div [hidden]="stateCodeModel.valid" class="alert alert-danger">
+          State Code is required
         </div>
       </div>
-      <div class="form-group"
-      *ngIf="addressDetail.stateCode==''">
+      <div class="form-group col-md-3" 
+    *ngIf="stateCodeModel" >
         <label for="statePinCode">State PinCode</label>
         <input type="text" class="form-control" id="statePinCode"
                [(ngModel)]="addressDetail.statePinCode" name="statePinCode"
-               >
+               #statePinCodeModel="ngModel"
+               (click)="selectStateCode">
       </div>
-    </div>
+      <div class="form-group col-md-3">
+        <label for="stateName">State Name</label>
+        <select class="form-control" id="stateName"
+        required
+        [(ngModel)]="addressDetail.stateName" name="stateName"
+        #stateNameModel="ngModel">
+  <option *ngFor="let stateName of stateNameValue" [value]="stateNameValue" selected="Select">{{stateName}}</option>
+  </select>
+      </div>
+      <button class="btn btn-success" (click)="funNext()">Next
+      </button>
+
+</ul>    
+</div>
   </div>

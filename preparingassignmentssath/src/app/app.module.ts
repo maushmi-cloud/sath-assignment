@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HospitalsNearByComponent } from './hospitals-near-by/hospitals-near-by.component';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+.table{
+    display: table;
+}
+.text-blue{
+    color: blue;
+}
+.gap-bottom{padding-bottom :15px;}
+
+.border-bottom{
+    border-bottom: 1px solid #dadada;
+}
+.edittable li label:last-child, .edittable .row > div:last-child{font-size: 1.15em;}
+.edittable label:first-child, .edittable.row > div:first-child{font-size: 1em;}
+.edittable{
+    margin-top: 5%;
+}
+.lead{font-size: 1.5em;}
+
+.mainTable{
+    position: relative;
+    max-width: inherit;
+    min-height: max-content;
+    overflow-y: hidden;
+    border-style: groove;
+    flood-color: blueviolet;
+}
+.maintable{
+    position: relative;
+    max-width: inherit;
+    min-height: max-content;
+    overflow-y: hidden;
+    border-style: double;
+    flood-color: blueviolet;
+}
